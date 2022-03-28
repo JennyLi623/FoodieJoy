@@ -12,9 +12,20 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       name: "",
-      email: ""
+      email: "",
+      apiResponse: ""
     };
 
+  }
+
+  callAPI() {
+    fetch("http://localhost:9000/testAPI")
+        .then(res => res.text())
+        .then(res => this.setState({ apiResponse: res }));
+  }
+
+  componentWillMount() {
+    this.callAPI();
   }
 
   handleLogIn = (name, email) => {
