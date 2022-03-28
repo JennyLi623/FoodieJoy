@@ -4,6 +4,8 @@ import {Container, Row, Col} from 'react-bootstrap';
 import fastfood from "./../static/fastfood.png"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import {auth} from './../service/firebase.js';
+import {signInWithEmailAndPassword} from 'firebase/auth';
 
 
 class Login extends Component {
@@ -18,8 +20,20 @@ class Login extends Component {
     const { email, password } = this.state;
 
     this.setState({loggedIn: 1});
-    handleLogIn(email, password);
-    this.setState({loggedIn: 2});
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      console.log(userCredential);
+      var user = userCredential.user;
+      handleLogIn(email, password);
+      this.setState({loggedIn: 2});
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(error.message);
+    });
   };
 
   updateField = ({ target }) => {
@@ -32,8 +46,8 @@ class Login extends Component {
     if (this.state.loggedIn === 2) {
       return(
         <div>
-          <p>您已成功登录</p>
-          <Link to="/">返回首页开始实验</Link>
+          <p>Logged In Successfully</p>
+          <Link to="/">Go back to mainpage</Link>
         </div>
       );
     }

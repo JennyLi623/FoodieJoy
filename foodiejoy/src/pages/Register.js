@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import {Container, Row, Col} from 'react-bootstrap';
+import {auth} from './../service/firebase.js';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 
 class Register extends Component {
   state = {
@@ -17,9 +19,33 @@ class Register extends Component {
     success: 0
   };
 
-  handleSubmit = e => {
+  handleSignUp = () => {
     const { name, email, password, repwd} = this.state;
-    // connect to backend
+    console.log("hiiiiii");
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(userCredential);
+          console.log(userCredential.user.getIdToken());
+
+          this.setState({success: 1});
+          user.getIdToken().then((id)=>{
+            const data = {
+            idToken : id,
+           };
+          })
+          .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
+      })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
     this.setState({success: 1});
   };
 
@@ -115,10 +141,10 @@ class Register extends Component {
           <br />
           <br />
 
-          <Link to="/" style={{ textDecoration: 'none'}}><Button onClick={() => this.handleSubmit()} style={{ background: "burlywood", color: "white"}}>Sign Up</Button></Link>
+          <Button onClick={() => this.handleSignUp()} style={{ background: "burlywood", color: "white"}}>Sign Up</Button>
         </form>
         <br />
-        <Link to="/register" style={{ textDecoration: 'underline', color: "#555555" }}><p>Click here to login</p></Link>
+        <Link to="/login" style={{ textDecoration: 'underline', color: "#555555" }}><p>Click here to login</p></Link>
         </Col>
         </Row>
         </Container>
