@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
+import Dish from "./Dish";
+import DishList from "./DishList";
+
 
 class Main extends Component {
   state = {
     name: "",
     password: "",
-    loggedIn: 0
+    loggedIn: 0,
+    detail: false,
   };
 
   handleSubmit = () => {
@@ -20,10 +24,22 @@ class Main extends Component {
   };
 
   render() {
-    const { name, password } = this.state;
+    const { name, password, detail } = this.state;
+    if (detail === true) {
+      return (
+        <div>
+          <Dish />
+        </div>
+      );
+    }
     return (
       <div>
-        Food List
+        <div>
+          Search for food
+        </div>
+        <div>
+          <DishList />
+        </div>
       </div>
     );
   }

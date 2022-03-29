@@ -25,7 +25,7 @@ class NavBar extends Component {
               </NavLink>
             }
             {loggedIn &&
-                <Navbar.Text>{"Hi, "+name}</Navbar.Text>
+                <NavLink to="/profile" className="nav-link">{"Hi, "+name}</NavLink>
             }
             {loggedIn &&
                 <Nav.Link to="/" onClick={() => handleLogOut()}>LogOut</Nav.Link>

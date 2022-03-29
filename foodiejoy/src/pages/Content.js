@@ -5,7 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Landing from "./Landing";
 import Post from "./Post";
-
+import User from "./User";
 
 class Content extends Component {
   render() {
@@ -40,6 +40,11 @@ class Content extends Component {
             exact
             path="/post"
             component={props => <Post {...this.props} />}
+          />
+          <Route
+            exact
+            path="/profile"
+            component={props => <User {...this.props} />}
           />
           <Route
             exact
