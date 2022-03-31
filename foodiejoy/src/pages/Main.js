@@ -35,7 +35,6 @@ class Main extends Component {
   }
   componentDidMount(){
       this.setState({dishes: foodlist});
-      console.log(foodlist);
   }
 
   render() {

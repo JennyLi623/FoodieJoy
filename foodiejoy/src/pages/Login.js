@@ -47,7 +47,7 @@ class Login extends Component {
       return(
         <div>
           <p>Logged In Successfully</p>
-          <Link to="/">Go back to mainpage</Link>
+          <Link to="/main">Go back to mainpage</Link>
         </div>
       );
     }
@@ -99,7 +99,7 @@ class Login extends Component {
               <br />
               <br />
               <br />
-              <Link to="/" style={{ textDecoration: 'none'}}><Button onClick={() => this.handleSubmit()} style={{ background: "burlywood", color: "white"}}>Submit</Button></Link>
+              <Link to="/main" style={{ textDecoration: 'none'}}><Button onClick={() => this.handleSubmit()} style={{ background: "burlywood", color: "white"}}>Submit</Button></Link>
             </form>
             <br />
             <Link to="/register" style={{ textDecoration: 'underline', color: "#555555" }}><p>Click here to register</p></Link>

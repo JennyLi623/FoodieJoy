@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 
 
 const DishList = ({ dishes }) => {
-  console.log(dishes);
   const cardsArray = dishes.map(dish => (
     <Grid item xs={4}>
     <RecipeReviewCard

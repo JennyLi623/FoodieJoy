@@ -48,7 +48,7 @@ class Content extends Component {
           />
           <Route
             exact
-            path="/"
+            path="/main"
             component={props => <Main {...this.props} />}
           />
         </Switch>
