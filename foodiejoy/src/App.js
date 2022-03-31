@@ -42,6 +42,7 @@ class App extends Component {
     //delete common["email"];
     //delete common["session_id"];
     this.setState({ loggedIn: false });
+    window.location.href = '/';
   };
 
   render() {

@@ -28,7 +28,7 @@ class NavBar extends Component {
                 <NavLink to="/profile" className="nav-link">{"Hi, "+name}</NavLink>
             }
             {loggedIn &&
-                <Nav.Link to="/main" onClick={() => handleLogOut()}>LogOut</Nav.Link>
+                <Nav.Link exact to="/" onClick={() => handleLogOut()}>LogOut</Nav.Link>
             }
           </Nav>
         </Navbar.Collapse>
