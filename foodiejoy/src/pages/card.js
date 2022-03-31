@@ -51,12 +51,6 @@ export default function RecipeReviewCard() {
         title="Shrimp and Chorizo Paella"
         subheader="March 14, 2022"
       />
-      {/* <CardMedia
-        component="img"
-        height="194"
-        image="./../static/foodpost.jpeg"
-        alt="Paella dish"
-      /> */}
       <img height="194" src={foodpost} 
       />
       <CardContent>
