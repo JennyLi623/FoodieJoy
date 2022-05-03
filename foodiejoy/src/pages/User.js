@@ -4,9 +4,28 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import foodpost from "./../static/foodpost.jpeg";
 import userpic from "./../static/user.png";
 import ReactRoundedImage from "react-rounded-image";
+import './../css/App.css';
+import DishList from "./DishList.js";
+import SearchBox from './SearchBox';
+import foodlist from "./dishes.js";
 
 class User extends Component {
   state = {};
+  constructor(){
+    super();
+  this.state = {
+    name: "",
+    password: "",
+    loggedIn: 0,
+    detail: false,
+    searchfield: '',
+    dishes:[]
+  }
+}
+componentDidMount(){
+  this.setState({dishes: foodlist});
+}
+
   render() {
     return (
       <div id = "user">
@@ -36,7 +55,13 @@ class User extends Component {
             Collected Items
           </p>
         </Container>
+        <div>
+              <div id='main-bg'>
+                <DishList dishes={this.state.dishes}/>
+              </div>
+        </div>
       </div>
+      
     );
   }
 }
