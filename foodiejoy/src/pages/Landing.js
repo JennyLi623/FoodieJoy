@@ -20,6 +20,7 @@ class Landing extends Component {
           <p className="sTitle">A community for you to find your favorite dish</p>
         </div>
         <div className="intro">
+
         <Container>
           <Row>
             <Col md="6">
