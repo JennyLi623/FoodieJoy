@@ -33,10 +33,15 @@ class Main extends Component {
     this.setState({loggedIn: 2});
   };
 
-  addLikes = async(commentID) => {
+  addLikes = async(commentID, fidx, cidx) => {
     await updateDoc(doc(db, "comments", commentID),
       {likes: increment(1)
     });
+    var comments = this.state.commentslist;
+    console.log(comments);
+    var likes = comments[fidx][cidx].likes;
+    comments[fidx][cidx].likes = likes + 1;
+    this.setState({commentslist: comments});
   };
 
   updateField = ({ target }) => {

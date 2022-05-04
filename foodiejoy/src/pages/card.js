@@ -36,15 +36,16 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
   console.log(props);
-  if (props.comments && props.comments !== []) {
-    const commentArray = props.comments.map((comment, idx) => (
+  var commentArray = null;
+  if (props.comments != undefined) {
+    commentArray = props.comments.map((comment, idx) => (
       <Row>
       <Col xs="9">
         <Typography paragraph>
           {comment.comment}
         </Typography>
       </Col>
-      <Col xs="3" onClick={() => props.addLikes(comment.id)}>
+      <Col xs="3" onClick={() => props.addLikes(comment.id, props.fidx, idx)}>
         <p className="likes">{comment.likes} likes</p>
       </Col>
       </Row>
@@ -64,7 +65,7 @@ export default function RecipeReviewCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={() => props.likeDish(props.dishID)}>
           <FavoriteIcon sx={{ color: red[500] }}/>
         </IconButton>
         <ExpandMore
@@ -78,7 +79,7 @@ export default function RecipeReviewCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          {//commentArray
+          {commentArray
           }
         </CardContent>
       </Collapse>
