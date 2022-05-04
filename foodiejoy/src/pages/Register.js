@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import {Container, Row, Col} from 'react-bootstrap';
 import {auth} from './../service/firebase.js';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
-import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import {db} from './../service/firebase.js';
 
 class Register extends Component {
@@ -24,7 +24,7 @@ class Register extends Component {
   };
 
   handleSignUp = () => {
-    const { name, email, password, repwd} = this.state;
+    const { name, email, password, repwd, intro} = this.state;
     console.log("hiiiiii");
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -39,6 +39,7 @@ class Register extends Component {
             email: email,
             password: password,
             repwd: repwd,
+            intro: intro,
             UserID: this.UserID
           })
 
@@ -74,7 +75,7 @@ class Register extends Component {
       //console.log("Document written with ID: ", docRef.id);
       this.docRef = await setDoc(doc(db, "users", this.UserID), data);
       //console.log("Document written with ID: ", this.docRef.id);
-      
+
   };
 
   render() {

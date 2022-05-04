@@ -1,28 +1,16 @@
 import React, { Component } from "react";
-import {BrowserRouter as Router, Switch, Route,Link} from 'react-router-dom';
+import {BrowserRouter, Route,Link} from 'react-router-dom';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import './../css/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
+import './../css/main.css';
 import DishList from "./DishList.js";
 import SearchBox from './SearchBox';
 import foodlist from "./dishes.js";
-
-import Header from './../components/Header/Header';
-import Banner from './../components/Banner/Banner';
-import Foods from './../components/Foods/Foods';
-import FoodDetails from './../components/FoodDetails/FoodDetails';
-import Blog from './../components/Blog/Blog';
-import Footer from './../components/Footer/Footer';
-import NotFound from './../components/NotFound/NotFound';
-import SignUp from './../components/SignUp/SignUp';
-import SearchResult from './../components/SearchResult/SearchResult';
+import Post from "./Post.js";
+import { collection, addDoc, setDoc, updateDoc, getDocs, doc, arrayUnion, arrayRemove, increment, query, where } from "firebase/firestore";
+import {db} from './../service/firebase.js';
 
 
 class Main extends Component {
-//function Main() {
   constructor(){
     super();
   this.state = {
@@ -33,101 +21,111 @@ class Main extends Component {
     postbutton:'',
     searchfield: '',
     dishes:[],
-    likes:[],
-    setLikes:[]
+    foodlist: [],
+    commentslist: [],
+    addDish: false,
   }
 }
-handleSubmit = () => {
-  const { handleLogIn } = this.props;
-  const { name, password } = this.state;
-  this.setState({loggedIn: 1});
-};
 
-updateField = ({ target }) => {
-  const { name, value } = target;
-  this.setState({ [name]: value });
-};
+  handleSubmit = () => {
+    const { handleLogIn } = this.props;
+    const { name, password } = this.state;
+    this.setState({loggedIn: 2});
+  };
 
-onSearchChange = (event) => {
-  this.setState({searchfield: event.target.value});
-}
+  addLikes = async(commentID, fidx, cidx) => {
+    await updateDoc(doc(db, "comments", commentID),
+      {likes: increment(1)
+    });
+    var comments = this.state.commentslist;
+    console.log(comments);
+    var likes = comments[fidx][cidx].likes;
+    comments[fidx][cidx].likes = likes + 1;
+    this.setState({commentslist: comments});
+  };
+
+  updateField = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  };
+  // postFood = (event) => {
+  //   this.setState({postbutton: event.target.value});
+  // }
+  onSearchChange = (event) => {
+    this.setState({searchfield: event.target.value});
+  }
+
+  changePostState = () => {
+    console.log(this.state.addDish);
+    this.setState({addDish: !this.state.addDish});
+  }
+
+  componentDidMount(){
+      this.setState({dishes: foodlist});
+      this.getAllDishes().then(() => {
+        console.log(this.state.foodlist);
+      });
+  }
+
+  getComments = async (dishID) => {
+    var templist = this.state.commentslist;
+    console.log(this.state.commentslist);
+    await getDocs(query(collection(db, "comments"), where("dishID", "==", dishID))).then((querySnapshot) => {
+      const tempDoc = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() }
+      })
+      templist.push(tempDoc);
+      this.setState({commentslist: templist});
+      console.log(this.state.commentslist);
+    })
+  }
+
+  getAllDishes = async () => {
+    var templist = []
+    const querySnapshot = await getDocs(collection(db, "dishes"));
+    querySnapshot.forEach(async (doc) => {
+      templist.push(doc);
+    });
+      this.setState({foodlist: templist});
+      console.log(this.state.foodlist);
+      if (this.state.foodlist !== [] ) {
+        for(var i = 0; i < this.state.foodlist.length; i++){
+          await this.getComments(this.state.foodlist[i].id);
+        }
+    }
+  }
 
   render() {
-
-  const {likes, setLikes} = this.state;
-
-  const likesHandler = currentFood => {
-
-    const alreadyAdded = likes.find(item => item.id === currentFood.id)
-
-    if (alreadyAdded) {
-      const reaminglikess = likes.filter(item => likes.id !== currentFood)
-      setLikes(reaminglikess);
-    } else {
-      const newlikes = [...likes, currentFood]
-      setLikes(newlikes);
-    }
-  }
-  const likesItemHandler = (foodID) => {
-      const newlikes = likes.map(item => {
-        if (item.id === foodID) {
-          item.selected = true;
+    const { name, password, detail} = this.state;
+    // const filteredDishes = this.state.dishes.filter(
+    //   dish =>{
+    //     return dish.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+    //   });
+    if (detail === false) {
+      return (
+        <div className="mainpage">
+          <div>
+            <h1 id='main-title'>Dishes</h1>
+          </div>
+          <div className='main-bg'>
+            <div class="container">
+              Learn more about delicious Dishes
+              <SearchBox searchChange={this.onSearchChange}/>
+            </div>
+            <DishList dishes={this.state.foodlist} comments={this.state.commentslist} addLikes={this.addLikes} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
+          </div>
+          {this.state.addDish &&
+            <Post postbutton={this.postFood} changePostState={this.changePostState}/>
+          }
+          {!this.state.addDish &&
+            <Button className="fixedbutton" onClick={() => this.changePostState()}>
+              Add a Dish
+            </Button>
         }
-        return item;
-      })
-  
-      const filteredlikes = newlikes.filter(item => item.selected)
-      setLikes(filteredlikes)
-    }
-
-  const clearlikes = () => {
-    setLikes([]);
-  }
-    return (
-        <Router>
-          <Switch>
-            <Route exact path="">
-              <Header
-                likes={likes}
-              />
-              <Banner />
-              <Foods
-                likes={likes}
-              />
-              <Blog />
-              <Footer />
-            </Route>
-  
-            <Route path='/food/:id'>
-              <Header
-                likes={likes}
-              />
-              <FoodDetails
-                likes={likes}
-                likesHandler={likesHandler}
-              />
-              <Footer />
-            </Route>
-  
-            <Route path='/search=:searchQuery'>
-              <Header
-                likes={likes}
-              />
-              <Banner />
-              <SearchResult />
-              <Blog />
-              <Footer />
-            </Route>
-  
-
-            <Route path="*">
-              <NotFound />
-            </Route>
-  
-          </Switch>
-        </Router>
-    );
+        </div>
+      );
     }
   }
+}
 
 export default Main;

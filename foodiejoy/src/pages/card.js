@@ -15,7 +15,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import foodpost from "./../static/foodpost.jpeg";
-
+import {Row, Col} from 'react-bootstrap';
+import './../css/card.css';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,44 +29,43 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  console.log(props);
+  if (props.comments && props.comments !== []) {
+    const commentArray = props.comments.map((comment, idx) => (
+      <Row>
+      <Col xs="9">
+        <Typography paragraph>
+          {comment.comment}
+        </Typography>
+      </Col>
+      <Col xs="3" onClick={() => props.addLikes(comment.id)}>
+        <p className="likes">{comment.likes} likes</p>
+      </Col>
+      </Row>
+    ));
+  }
   return (
-    <Card sx={{ maxWidth: 345 }} style={{margin:"10px"}}>
+    <Card>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="March 14, 2022"
+        title={props.dish}
+        subheader={props.place}
       />
-      <img height="194" src={foodpost} 
+      <img height="194" src={foodpost}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+          <FavoriteIcon sx={{ color: red[500] }}/>
         </IconButton>
         <ExpandMore
           expand={expanded}
@@ -78,31 +78,8 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
+          {//commentArray
+          }
         </CardContent>
       </Collapse>
     </Card>

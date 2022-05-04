@@ -4,7 +4,7 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import foodpost from "./../static/foodpost.jpeg";
 import userpic from "./../static/user.png";
 import ReactRoundedImage from "react-rounded-image";
-import './../css/App.css';
+import './../css/user.css';
 import DishList from "./DishList.js";
 import SearchBox from './SearchBox';
 import foodlist from "./dishes.js";
@@ -27,8 +27,8 @@ componentDidMount(){
 }
 
   render() {
-    const { name, email, userID } = this.props;
-    
+    const { name, email, userID, intro } = this.props;
+
     return (
       <div id = "user">
         <Container >
@@ -43,11 +43,14 @@ componentDidMount(){
               />
             </Col>
             <Col md="5">
-              <p className="username">
-                Name : {name}
+              <p className="uname">
+                {name}
               </p>
-              <p className="username">
-                UserID : {name}
+              <p className="uemail">
+                {email}
+              </p>
+              <p className="uintro">
+                {intro}
               </p>
             </Col>
           </Row>
@@ -56,9 +59,6 @@ componentDidMount(){
           <p className="title">
             Collected Items
           </p>
-          <p className="username">
-              UserID : {name}
-          </p>
         </Container>
         <div>
               <div id='main-bg'>
@@ -66,7 +66,7 @@ componentDidMount(){
               </div>
         </div>
       </div>
-      
+
     );
   }
 }
