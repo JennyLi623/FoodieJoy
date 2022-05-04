@@ -75,12 +75,16 @@ class Post extends Component {
 
   addFood = async (data, comment) => {
     this.docRef = await addDoc(collection(db, "dishes"), data).then(async (doc) => {
-      await addDoc(collection(db, "comments"), {comment: comment, likes: 0, dishID: doc.id})
+      await addDoc(collection(db, "comments"), {comment: comment, likes: 0, dishID: doc.id}).then(() => {
+      this.props.getAllDishes();
+    });
     })
   };
 
   addComment = async (dishID, comment) => {
-     await addDoc(collection(db, "comments"), {comment: comment, likes: 0, dishID: dishID})
+     await addDoc(collection(db, "comments"), {comment: comment, likes: 0, dishID: dishID}).then(() => {
+       this.props.getAllDishes();
+     });
  };
 
  autofill = (dish, place, description, id) => {

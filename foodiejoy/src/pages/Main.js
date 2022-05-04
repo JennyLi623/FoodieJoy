@@ -78,6 +78,7 @@ class Main extends Component {
       this.setState({commentslist: templist});
       console.log(this.state.commentslist);
     })
+
   }
 
   getAllDishes = async () => {
@@ -115,7 +116,7 @@ class Main extends Component {
             <DishList dishes={this.state.foodlist} comments={this.state.commentslist} addLikes={this.addLikes} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
           </div>
           {this.state.addDish &&
-            <Post postbutton={this.postFood} changePostState={this.changePostState}/>
+            <Post postbutton={this.postFood} changePostState={this.changePostState} getAllDishes={this.getAllDishes}/>
           }
           {!this.state.addDish &&
             <Button className="fixedbutton" onClick={() => this.changePostState()}>
