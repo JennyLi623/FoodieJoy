@@ -25,16 +25,14 @@ class Main extends Component {
   handleSubmit = () => {
     const { handleLogIn } = this.props;
     const { name, password } = this.state;
-    this.setState({loggedIn: 2});
+    this.setState({loggedIn: 1});
   };
 
   updateField = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
-  // postFood = (event) => {
-  //   this.setState({postbutton: event.target.value});
-  // }
+  
   onSearchChange = (event) => {
     this.setState({searchfield: event.target.value});
   }
@@ -67,8 +65,8 @@ class Main extends Component {
               </div>
 
               <div class="col">
-              Post more delicious Dishes
-              <Post postbutton={this.postFood}/>
+              Contribute more delicious Dishes     
+              <button className="button" onClick={() => this.handleSubmit()}>Upload Food</button>
               </div>
               </div>
 

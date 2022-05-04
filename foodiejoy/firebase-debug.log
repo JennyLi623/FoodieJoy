@@ -1,0 +1,37 @@
+[debug] [2022-05-04T07:57:55.397Z] ----------------------------------------------------------------------
+[debug] [2022-05-04T07:57:55.398Z] Command:       /Users/Chat/.nvm/versions/node/v16.14.0/bin/node /Users/Chat/.nvm/versions/node/v16.14.0/bin/firebase serve
+[debug] [2022-05-04T07:57:55.398Z] CLI Version:   10.7.2
+[debug] [2022-05-04T07:57:55.398Z] Platform:      darwin
+[debug] [2022-05-04T07:57:55.398Z] Node Version:  v16.14.0
+[debug] [2022-05-04T07:57:55.399Z] Time:          Wed May 04 2022 03:57:55 GMT-0400 (Eastern Daylight Time)
+[debug] [2022-05-04T07:57:55.399Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-05-04T07:57:55.427Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-05-04T07:57:55.427Z] > authorizing via signed-in user (jt587@cornell.edu)
+[debug] [2022-05-04T07:57:55.427Z] [iam] checking project dogfriends-4a67a for permissions ["firebase.projects.get"]
+[debug] [2022-05-04T07:57:55.428Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dogfriends-4a67a:testIamPermissions [none]
+[debug] [2022-05-04T07:57:55.428Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dogfriends-4a67a:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-05-04T07:57:55.642Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dogfriends-4a67a:testIamPermissions 200
+[debug] [2022-05-04T07:57:55.643Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dogfriends-4a67a:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-05-04T07:57:55.644Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dogfriends-4a67a [none]
+[debug] [2022-05-04T07:57:55.924Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dogfriends-4a67a 200
+[debug] [2022-05-04T07:57:55.924Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dogfriends-4a67a {"projectId":"dogfriends-4a67a","projectNumber":"1083199046331","displayName":"dogfriends","name":"projects/dogfriends-4a67a","resources":{"hostingSite":"dogfriends-4a67a","realtimeDatabaseInstance":"dogfriends-4a67a-default-rtdb","storageBucket":"dogfriends-4a67a.appspot.com","locationId":"us-east1"},"state":"ACTIVE"}
+[info] 
+[info] === Serving from '/Users/Chat/Desktop/Spring courses/startup system/FoodieJoy/foodiejoy'...
+[info] 
+[debug] [2022-05-04T07:57:55.926Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/dogfriends-4a67a/sites 
+[debug] [2022-05-04T07:57:56.400Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/dogfriends-4a67a/sites 200
+[debug] [2022-05-04T07:57:56.400Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/dogfriends-4a67a/sites {"sites":[{"name":"projects/dogfriends-4a67a/sites/dogfriends-4a67a","defaultUrl":"https://dogfriends-4a67a.web.app","appId":"1:1083199046331:web:d89026ce209157421edf9e","type":"DEFAULT_SITE"}]}
+[debug] [2022-05-04T07:57:56.401Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dogfriends-4a67a/webApps/1:1083199046331:web:d89026ce209157421edf9e/config [none]
+[debug] [2022-05-04T07:57:56.832Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dogfriends-4a67a/webApps/1:1083199046331:web:d89026ce209157421edf9e/config 200
+[debug] [2022-05-04T07:57:56.832Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dogfriends-4a67a/webApps/1:1083199046331:web:d89026ce209157421edf9e/config {"projectId":"dogfriends-4a67a","appId":"1:1083199046331:web:d89026ce209157421edf9e","databaseURL":"https://dogfriends-4a67a-default-rtdb.firebaseio.com","storageBucket":"dogfriends-4a67a.appspot.com","locationId":"us-east1","apiKey":"AIzaSyCzqAolVTWnaRkNm-0pPPJikRnWk6z6NGY","authDomain":"dogfriends-4a67a.firebaseapp.com","messagingSenderId":"1083199046331","measurementId":"G-D5EZPG2Z8F"}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port... {"metadata":{"emulator":{"name":"hosting"},"message":"\u001b[33mhosting: \u001b[39mPort 5000 is not available. Trying another port..."}}
+[info] i  hosting: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5035 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5035\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [04/May/2022:07:58:04 +0000] "GET / HTTP/1.1" 404 139 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [04/May/2022:07:58:04 +0000] \"GET / HTTP/1.1\" 404 139 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\""}}
