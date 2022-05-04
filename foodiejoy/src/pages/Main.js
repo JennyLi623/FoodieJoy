@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import {BrowserRouter, Route,Link} from 'react-router-dom';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import './../css/App.css';
 import DishList from "./DishList.js";
 import SearchBox from './SearchBox';
 import foodlist from "./dishes.js";
-
+import Post from "./Post.js";
 
 
 class Main extends Component {
@@ -15,6 +16,7 @@ class Main extends Component {
     password: "",
     loggedIn: 0,
     detail: false,
+    postbutton:'',
     searchfield: '',
     dishes:[]
   }
@@ -23,13 +25,16 @@ class Main extends Component {
   handleSubmit = () => {
     const { handleLogIn } = this.props;
     const { name, password } = this.state;
-    this.setState({loggedIn: 1});
+    this.setState({loggedIn: 2});
   };
 
   updateField = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
+  // postFood = (event) => {
+  //   this.setState({postbutton: event.target.value});
+  // }
   onSearchChange = (event) => {
     this.setState({searchfield: event.target.value});
   }
@@ -47,14 +52,30 @@ class Main extends Component {
       return (
         <div>
           <div>
-          Learn about more delicious Dishes
+          <h1 id='main-title'>Dishes</h1>
           </div>
         <div>
-              <div id='main-bg'>
-                <h1 id='main-title'>Dishes</h1>
-                <SearchBox searchChange={this.onSearchChange}/>
-                <DishList dishes={this.state.dishes}/>
-                </div>
+        <div id='main-bg'>
+          <div class="container">
+          <div class="row">
+            <div class="col">
+              Learn more about delicious Dishes
+              <SearchBox searchChange={this.onSearchChange}/>
+            </div> 
+
+              <div class="col-6">
+              </div>
+
+              <div class="col">
+              Post more delicious Dishes
+              <Post postbutton={this.postFood}/>
+              </div>
+              </div>
+
+          </div>
+                
+          <DishList dishes={this.state.dishes}/>
+          </div>
         </div>
         </div>
       );
