@@ -55,12 +55,14 @@ class App extends Component {
     var dishes = this.state.likedDish;
     if (!this.state.likedDish.includes(dishID)) {
       dishes.push(dishID);
+      this.setState({likeDish: dishes});
     }
     else{
-      dishes.filter(f => f !== dishID)
+      dishes = dishes.filter(e => e !== dishID);
+      this.setState({likedDish: dishes});
+      console.log(dishes);
     }
-    console.log(this.likedDish);
-    this.setState({likeDish: dishes});
+    console.log(this.state.likedDish);
   }
 
 
