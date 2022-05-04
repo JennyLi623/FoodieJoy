@@ -37,8 +37,8 @@ export default function RecipeReviewCard(props) {
   };
   console.log(props);
   var commentArray = null;
-  if (props.comments != undefined) {
-    commentArray = props.comments.map((comment, idx) => (
+  if (props.comments != undefined && props.comments[props.fidx] != undefined) {
+    commentArray = props.comments[props.fidx].map((comment, idx) => (
       <Row>
       <Col xs="9">
         <Typography paragraph>

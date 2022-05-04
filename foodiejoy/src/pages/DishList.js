@@ -15,7 +15,7 @@ const DishList = ({ dishes, comments, addLikes, likeDish, likedDish }) => {
       dishID={doc.id}
       place={doc.data().place}
       description={doc.data().description}
-      comments={comments[idx]}
+      comments={comments}
       fidx = {idx}
       url='https://images.pexels.com/photos/45170/kittens-cat-cat-puppy-rush-45170.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150'
       likeDish={likeDish}

@@ -18,3 +18,8 @@
   border-style: solid;
   padding: 20px;
 }
+
+  .user-bg {
+    margin: 20px 80px;
+    max-width: 960px;
+  }

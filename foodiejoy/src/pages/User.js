@@ -8,6 +8,9 @@ import './../css/user.css';
 import DishList from "./DishList.js";
 import SearchBox from './SearchBox';
 import foodlist from "./dishes.js";
+import { collection, addDoc, setDoc, updateDoc, getDocs, doc, arrayUnion, arrayRemove, increment, query, where } from "firebase/firestore";
+import {db} from './../service/firebase.js';
+
 
 class User extends Component {
   state = {};
@@ -19,12 +22,29 @@ class User extends Component {
     loggedIn: 0,
     detail: false,
     searchfield: '',
-    dishes:[]
+    dishes:[],
+    foodlist: [],
   }
 }
-componentDidMount(){
-  this.setState({dishes: foodlist});
-}
+  componentDidMount(){
+      this.setState({dishes: foodlist});
+      this.getAllDishes().then(() => {
+        console.log(this.state.foodlist);
+      });
+  }
+
+  getAllDishes = async () => {
+    console.log(this.props);
+    var templist = []
+    const querySnapshot = await getDocs(collection(db, "dishes"));
+    querySnapshot.forEach(async (doc) => {
+      if (this.props.likedDish.includes(doc.id) ) {
+        templist.push(doc);
+      }
+    });
+    this.setState({foodlist: templist});
+    console.log(this.state.foodlist);
+  }
 
   render() {
     const { name, email, userID, intro } = this.props;
@@ -61,8 +81,8 @@ componentDidMount(){
           </p>
         </Container>
         <div>
-              <div id='main-bg'>
-                <DishList dishes={this.state.dishes}/>
+              <div id='main-bg' className="user-bg">
+                <DishList dishes={this.state.foodlist} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
               </div>
         </div>
       </div>
