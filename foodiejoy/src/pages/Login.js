@@ -6,8 +6,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {auth} from './../service/firebase.js';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-
-
+import { collection, getDoc , doc } from "firebase/firestore";
+import {db} from './../service/firebase.js';
 
 class Login extends Component {
   state = {
@@ -27,8 +27,12 @@ class Login extends Component {
       // Signed in
       console.log(userCredential);
       var user = userCredential.user;
-      this.userID = user.uid;
-      handleLogIn(email, password, user.uid);
+      this.setState({userID: user.uid});
+      this.getUser(user.uid).then((u) => {
+        console.log(u);
+        handleLogIn(u.name, u.email, u.UserID, u.intro);
+      });
+
       this.setState({loggedIn: 2});
       // ...
     })
@@ -43,6 +47,13 @@ class Login extends Component {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
+
+  getUser = async (userID) => {
+     var docRef = doc(db, "users", userID);
+     const docSnap = await getDoc(docRef);
+     return docSnap.data();
+
+ };
 
   render() {
     const { email, password } = this.state;

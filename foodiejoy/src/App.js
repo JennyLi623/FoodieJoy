@@ -14,7 +14,8 @@ class App extends Component {
       name: "",
       email: "",
       apiResponse: "",
-      userID: ""
+      userID: "",
+      intro: ""
     };
 
   }
@@ -29,11 +30,12 @@ class App extends Component {
     this.callAPI();
   }
 
-  handleLogIn = (name, email, userID) => {
+  handleLogIn = (name, email, userID, intro) => {
     this.setState({ loggedIn: true });
     this.setState({ name: name });
     this.setState({ email: email });
     this.setState({ userID: userID });
+    this.setState({intro: intro});
     console.log("handleLogIn" + userID);
     console.log("handleLogIn" + this.state.userID);
   };
@@ -52,7 +54,7 @@ class App extends Component {
     return (
       <div>
         <NavBar handleLogOut={this.handleLogOut} loggedIn={this.state.loggedIn} name={this.state.name} />
-        <Content handleLogOut={this.handleLogOut} handleLogIn={this.handleLogIn} loggedIn={this.state.loggedIn} name={this.state.name} email={this.state.email}/>
+        <Content handleLogOut={this.handleLogOut} handleLogIn={this.handleLogIn} loggedIn={this.state.loggedIn} name={this.state.name} email={this.state.email} intro={this.state.intro}/>
       </div>
     );
   }
