@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import {Container, Row, Col} from 'react-bootstrap';
 import {auth} from './../service/firebase.js';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
+import { collection, addDoc } from "firebase/firestore"; 
+import {db} from './../service/firebase.js';
 
 class Register extends Component {
   state = {
@@ -29,6 +31,13 @@ class Register extends Component {
           console.log(userCredential);
           console.log(userCredential.user.getIdToken());
 
+          this.addUser({
+            name: name,
+            email: email,
+            password: password,
+            repwd: repwd
+          })
+
           this.setState({success: 1});
           user.getIdToken().then((id)=>{
             const data = {
@@ -47,12 +56,18 @@ class Register extends Component {
           console.log(errorMessage);
         });
     this.setState({success: 1});
+
   };
 
   updateField = ({ target }) => {
     const { name, value } = target;
 
     this.setState({ [name]: value });
+  };
+
+   addUser = function(data) {
+      addDoc(collection(db, "users"), data);
+      //console.log("Document written with ID: ", docRef.id);
   };
 
   render() {
