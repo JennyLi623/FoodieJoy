@@ -14,9 +14,8 @@ const Footer = () => {
                     <div className='col-md-3'>
                         <ul className='list-unstyled'>
                             <li><Link to='/about'>About Online Food</Link></li>
-                            <li><Link to='/blog'>Read Our Blog</Link></li>
-                            <li><Link to='/signup'>Sign up to deliver</Link></li>
-                            <li><Link to='/restaurants'>Add your restaurant</Link></li>
+                            <li><Link to='/blog'>Read More Blog</Link></li>
+                            <li><Link to='/signup'>Sign up to join us</Link></li>
                         </ul>
                     </div>
                     <div className='col-md-3'>
@@ -30,13 +29,12 @@ const Footer = () => {
                 </div>
 
                 <div className='footer-bottom d-flex justify-content-between'>
-                    <small className='text-secondary'>Copyright &copy; 2020 Red Onion Online Food. Proudly created by <span>❤️</span>
-                        <span><a className='text-color' href="https://github.com/PriontoAbdullah"> Prionto Abdullah</a></span>
+                    <small className='text-secondary'>Copyright &copy; <span>❤️</span>
+                        <span><a className='text-color' href="https://github.com/JennyLi623/FoodieJoy.git"> FoodieJoy</a></span>
                     </small>
                     <ul className="list-inline">
                         <li className="list-inline-item ml-3"><Link to='/policy'>Privacy Policy</Link></li>
                         <li className="list-inline-item  ml-3"><Link to='/terms'>Terms of Use</Link></li>
-                        <li className="list-inline-item  ml-3"><Link to='/pricing'>Pricing</Link></li>
                     </ul>
                 </div>
             </div>

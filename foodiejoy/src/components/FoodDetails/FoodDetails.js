@@ -1,4 +1,4 @@
-import { faCartArrowDown, faCheckCircle, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -6,7 +6,6 @@ import allFoods from '../../fakeData/index';
 import suggestionFood from '../../fakeData/suggestionFood';
 import RecommendFood from '../RecommendFood/RecommendFood';
 import './FoodDetails.css';
-
 const FoodDetails = (props) => {
 
     useEffect(() => {
@@ -26,10 +25,10 @@ const FoodDetails = (props) => {
         }
     }, [currentFood.quantity])
 
-    const finalCartHandler = currentFood => {
+    const finalLikesHandler = currentFood => {
         currentFood.quantity = quantity;
 
-        props.cartHandler(currentFood);
+        props.likesHandler(currentFood);
         setIsSuccess(true);
     }
 
@@ -51,11 +50,11 @@ const FoodDetails = (props) => {
         suggestionFood.splice(m, 3);
         setSuggestFoods(newSuggestFood);
     }
-    
+
     function goBack() {
         history.push("/");
         window.scrollTo(0, 9999);
-      }
+    }
 
     return (
         <div className='food-details container scrollable'>
@@ -74,7 +73,7 @@ const FoodDetails = (props) => {
                     <div className='d-flex my-4'>
                         <h2 className='price'>${currentFood.price}</h2>
 
-                        <div className='cart-controller ml-3 btn'>
+                        <div className='likes-controller ml-3 btn'>
                             <button
                                 className='btn'
                                 onClick={() => setQuantity(quantity <= 1 ? 1 : quantity - 1)}
@@ -93,16 +92,16 @@ const FoodDetails = (props) => {
 
                     <div className="action d-flex align-items-center">
                         <button className='btn btn-danger btn-rounded mb-2'
-                            onClick={() => finalCartHandler(currentFood)}
+                            onClick={() => finalLikesHandler(currentFood)}
                         >
-                            <FontAwesomeIcon icon={faCartArrowDown} />
+                            <FontAwesomeIcon icon="fa-brands fa-gratipay" />
                             <span>  Add</span>
                         </button>
                         {isSuccess &&
                             <p
                                 className="ml-3 success-mgs text-success"
                             ><FontAwesomeIcon icon={faCheckCircle}
-                                />  Item added to Cart
+                                />  Item added to likes
                             </p>
                         }
                     </div>

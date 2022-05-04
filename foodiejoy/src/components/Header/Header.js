@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import Logo from '../../images/logo2.png';
+import Logo from '../../images/logo.png';
 import userPhoto from '../../images/ICON/Group 2.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../SignUp/useAuth';
 
 const Header = (props) => {
@@ -20,16 +19,17 @@ const Header = (props) => {
 
                 <ul className='navbar-nav align-items-center'>
                     <li className='nav-item active'>
-                        <Link to='/checkout' className='nav-link'>
-                            <FontAwesomeIcon icon={faCartArrowDown} />
-                            <span className='badge bg-light'>{props.cart.length}</span>
+                        <Link to='/favorite' className='nav-link'>
+                            
+                            <FontAwesomeIcon icon="fa-brands fa-gratipay" />
+                            <span className='badge bg-light'>{props.likes.length}</span>
                         </Link>
                     </li>
 
                     <li className='nav-item'>
                         {
                             auth.user ?
-                                <Link to='/checkout' className='nav-link'>
+                                <Link to='/favorite' className='nav-link'>
                                     {auth.user.displayName}
                                     <img className='ml-3' src={auth.user.photoURL ? auth.user.photoURL : userPhoto} width="35px" alt="" />
                                 </Link>

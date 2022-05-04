@@ -76,7 +76,7 @@ main, #reviews-card {
   opacity: 1;
 }
 .review-container .pic {
-  background-image: url('./../../public/profile_placeholder.png');
+  background-image: url('./../images/ICON/profile_placeholder.png');
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
@@ -142,7 +142,7 @@ main, #reviews-card {
   top: -3px;
   position: relative;
   display: inline-block;
-  background-image: url('./../../public/profile_placeholder.png');
+  background-image: url('./../images/ICON/profile_placeholder.png');
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;

@@ -1,9 +1,9 @@
-.cart-controller {
+.likes-controller {
 	border-radius: 30px;
 	border: 1px solid lightgrey;
 }
 
-.cart-controller .btn {
+.likes-controller .btn {
 	font-size: 20px;
 	line-height: 30px;
 	padding: 0 10px !important;
