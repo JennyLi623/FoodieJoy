@@ -13,7 +13,8 @@ class App extends Component {
       loggedIn: false,
       name: "",
       email: "",
-      apiResponse: ""
+      apiResponse: "",
+      userID: ""
     };
 
   }
@@ -28,11 +29,13 @@ class App extends Component {
     this.callAPI();
   }
 
-  handleLogIn = (name, email) => {
-    //console.log("handleLogIn");
+  handleLogIn = (name, email, userID) => {
     this.setState({ loggedIn: true });
     this.setState({ name: name });
     this.setState({ email: email });
+    this.setState({ userID: userID });
+    console.log("handleLogIn" + userID);
+    console.log("handleLogIn" + this.state.userID);
   };
 
   handleLogOut = () => {

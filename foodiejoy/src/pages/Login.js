@@ -13,7 +13,8 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    loggedIn: 0
+    loggedIn: 0,
+    userID: ""
   };
 
   handleSubmit = () => {
@@ -26,7 +27,8 @@ class Login extends Component {
       // Signed in
       console.log(userCredential);
       var user = userCredential.user;
-      handleLogIn(email, password);
+      this.userID = user.uid;
+      handleLogIn(email, password, user.uid);
       this.setState({loggedIn: 2});
       // ...
     })

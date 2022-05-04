@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import {Container, Row, Col} from 'react-bootstrap';
 import {auth} from './../service/firebase.js';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import {db} from './../service/firebase.js';
 
 class Register extends Component {
@@ -18,7 +18,9 @@ class Register extends Component {
     repwd: "",
     intro: "",
     submit: 0,
-    success: 0
+    success: 0,
+    docRef: "",
+    UserID: ""
   };
 
   handleSignUp = () => {
@@ -30,12 +32,14 @@ class Register extends Component {
           const user = userCredential.user;
           console.log(userCredential);
           console.log(userCredential.user.getIdToken());
-
+          console.log(userCredential.user.uid);
+          this.UserID = userCredential.user.uid;
           this.addUser({
             name: name,
             email: email,
             password: password,
-            repwd: repwd
+            repwd: repwd,
+            UserID: this.UserID
           })
 
           this.setState({success: 1});
@@ -65,9 +69,12 @@ class Register extends Component {
     this.setState({ [name]: value });
   };
 
-   addUser = function(data) {
-      addDoc(collection(db, "users"), data);
+   addUser = async (data) => {
+      //addDoc(collection(db, "users"), data);
       //console.log("Document written with ID: ", docRef.id);
+      this.docRef = await setDoc(doc(db, "users", this.UserID), data);
+      //console.log("Document written with ID: ", this.docRef.id);
+      
   };
 
   render() {

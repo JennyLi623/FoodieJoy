@@ -27,6 +27,8 @@ componentDidMount(){
 }
 
   render() {
+    const { name, email, userID } = this.props;
+    
     return (
       <div id = "user">
         <Container >
@@ -42,10 +44,10 @@ componentDidMount(){
             </Col>
             <Col md="5">
               <p className="username">
-                Name
+                Name : {name}
               </p>
               <p className="username">
-                Email
+                UserID : {name}
               </p>
             </Col>
           </Row>
@@ -53,6 +55,9 @@ componentDidMount(){
         <Container>
           <p className="title">
             Collected Items
+          </p>
+          <p className="username">
+              UserID : {name}
           </p>
         </Container>
         <div>
