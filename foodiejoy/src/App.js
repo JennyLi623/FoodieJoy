@@ -15,7 +15,8 @@ class App extends Component {
       email: "",
       apiResponse: "",
       userID: "",
-      intro: ""
+      intro: "",
+      likedDish: [],
     };
 
   }
@@ -50,11 +51,24 @@ class App extends Component {
     window.location.href = '/';
   };
 
+  likeDish = (dishID) => {
+    var dishes = this.state.likedDish;
+    if (!this.state.likedDish.includes(dishID)) {
+      dishes.push(dishID);
+    }
+    else{
+      dishes.filter(f => f !== dishID)
+    }
+    console.log(this.likedDish);
+    this.setState({likeDish: dishes});
+  }
+
+
   render() {
     return (
       <div>
         <NavBar handleLogOut={this.handleLogOut} loggedIn={this.state.loggedIn} name={this.state.name} />
-        <Content handleLogOut={this.handleLogOut} handleLogIn={this.handleLogIn} loggedIn={this.state.loggedIn} name={this.state.name} email={this.state.email} intro={this.state.intro}/>
+        <Content handleLogOut={this.handleLogOut} likedDish={this.state.likedDish} likeDish={this.likeDish} handleLogIn={this.handleLogIn} loggedIn={this.state.loggedIn} name={this.state.name} email={this.state.email} intro={this.state.intro}/>
       </div>
     );
   }

@@ -96,7 +96,7 @@ class Main extends Component {
   }
 
   render() {
-    const { name, password, detail } = this.state;
+    const { name, password, detail} = this.state;
     // const filteredDishes = this.state.dishes.filter(
     //   dish =>{
     //     return dish.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
@@ -112,7 +112,7 @@ class Main extends Component {
               Learn more about delicious Dishes
               <SearchBox searchChange={this.onSearchChange}/>
             </div>
-            <DishList dishes={this.state.foodlist} comments={this.state.commentslist} addLikes={this.addLikes}/>
+            <DishList dishes={this.state.foodlist} comments={this.state.commentslist} addLikes={this.addLikes} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
           </div>
           {this.state.addDish &&
             <Post postbutton={this.postFood} changePostState={this.changePostState}/>

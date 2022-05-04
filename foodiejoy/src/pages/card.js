@@ -66,7 +66,12 @@ export default function RecipeReviewCard(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={() => props.likeDish(props.dishID)}>
+        {props.likedDish !==undefined && props.likedDish.includes(props.dishID) &&
           <FavoriteIcon sx={{ color: red[500] }}/>
+        }
+        {props.likedDish ===undefined || !props.likedDish.includes(props.dishID) &&
+          <FavoriteIcon disabled/>
+        }
         </IconButton>
         <ExpandMore
           expand={expanded}

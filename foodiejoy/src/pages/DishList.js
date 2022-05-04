@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 
 
 
-const DishList = ({ dishes, comments, addLikes }) => {
+const DishList = ({ dishes, comments, addLikes, likeDish, likedDish }) => {
   const cardsArray = dishes.map((doc, idx) => (
     <Grid item xs={4}>
     <RecipeReviewCard
@@ -18,6 +18,8 @@ const DishList = ({ dishes, comments, addLikes }) => {
       comments={comments[idx]}
       fidx = {idx}
       url='https://images.pexels.com/photos/45170/kittens-cat-cat-puppy-rush-45170.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150'
+      likeDish={likeDish}
+      likedDish={likedDish}
       addLikes={addLikes}/>
       </Grid>
   ));

@@ -8,8 +8,12 @@ import Post from "./Post";
 import User from "./User";
 
 class Content extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
-    const { handleLogOut, handleLogIn, loggedIn } = this.props;
+    const { handleLogOut, handleLogIn, loggedIn, likeDish, likedDish } = this.props;
     if (!loggedIn) {
       return (
         <div className="content">
