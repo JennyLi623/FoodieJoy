@@ -29,6 +29,7 @@ class Login extends Component {
       var user = userCredential.user;
       this.setState({userID: user.uid});
       this.getUser(user.uid).then((u) => {
+        console.log("handle login Submit");
         console.log(u);
         handleLogIn(u.name, u.email, u.UserID, u.intro);
       });

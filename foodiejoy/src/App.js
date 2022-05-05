@@ -4,6 +4,8 @@ import Axios from "axios";
 
 import NavBar from "./pages/NavBar";
 import Content from "./pages/Content";
+import { doc, getDoc , updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {db} from './service/firebase.js';
 
 class App extends Component {
   constructor(props){
@@ -16,7 +18,7 @@ class App extends Component {
       apiResponse: "",
       userID: "",
       intro: "",
-      likedDish: [],
+      likedDish: []
     };
 
   }
@@ -51,7 +53,7 @@ class App extends Component {
     window.location.href = '/';
   };
 
-  likeDish = (dishID) => {
+  likeDish = async(dishID) => {
     var dishes = this.state.likedDish;
     if (!this.state.likedDish.includes(dishID)) {
       dishes.push(dishID);
@@ -63,6 +65,11 @@ class App extends Component {
       console.log(dishes);
     }
     console.log(this.state.likedDish);
+
+    const docRef = doc(db, "users", this.state.userID);
+    await updateDoc(docRef, {
+      dishes: arrayUnion(dishID)
+    });
   }
 
 
@@ -70,7 +77,7 @@ class App extends Component {
     return (
       <div>
         <NavBar handleLogOut={this.handleLogOut} loggedIn={this.state.loggedIn} name={this.state.name} />
-        <Content handleLogOut={this.handleLogOut} likedDish={this.state.likedDish} likeDish={this.likeDish} handleLogIn={this.handleLogIn} loggedIn={this.state.loggedIn} name={this.state.name} email={this.state.email} intro={this.state.intro}/>
+        <Content handleLogOut={this.handleLogOut} likedDish={this.state.likedDish} likeDish={this.likeDish} handleLogIn={this.handleLogIn} loggedIn={this.state.loggedIn} name={this.state.name} email={this.state.email} intro={this.state.intro} userID = {this.state.userID}/>
       </div>
     );
   }

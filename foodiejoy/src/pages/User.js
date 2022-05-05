@@ -8,7 +8,7 @@ import './../css/user.css';
 import DishList from "./DishList.js";
 import SearchBox from './SearchBox';
 import foodlist from "./dishes.js";
-import { collection, addDoc, setDoc, updateDoc, getDocs, doc, arrayUnion, arrayRemove, increment, query, where } from "firebase/firestore";
+import { collection, addDoc, setDoc, updateDoc,getDoc, getDocs, doc, arrayUnion, arrayRemove, increment, query, where } from "firebase/firestore";
 import {db} from './../service/firebase.js';
 
 
@@ -24,12 +24,18 @@ class User extends Component {
     searchfield: '',
     dishes:[],
     foodlist: [],
+    userID: "",
+    onlineLikeDish: []
   }
 }
   componentDidMount(){
       this.setState({dishes: foodlist});
       this.getAllDishes().then(() => {
         console.log(this.state.foodlist);
+      });
+      this.getLikeDish().then(() =>{
+        console.log("getLiked Dish");
+        console.log(this.state.onlineLikeDish);
       });
   }
 
@@ -44,6 +50,34 @@ class User extends Component {
     });
     this.setState({foodlist: templist});
     console.log(this.state.foodlist);
+  }
+
+  getLikeDish = async () => {
+    console.log("getLikeDish");
+    console.log(this.props);
+    const { userID } = this.props;
+
+    var templist = []
+    console.log(userID);
+    const docRef = doc(db, "users", userID);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    console.log(docSnap.data());
+    var onlineliked = docSnap.data().dishes;
+
+    const querySnapshot = await getDocs(collection(db, "dishes"));
+    querySnapshot.forEach(async (doc) => {
+      if (onlineliked.includes(doc.id) ) {
+        templist.push(doc);
+      }
+    });
+    this.setState({onlineLikeDish: templist});
+    console.log(this.state.onlineLikeDish);
   }
 
   render() {
@@ -82,7 +116,7 @@ class User extends Component {
         </Container>
         <div>
               <div id='main-bg' className="user-bg">
-                <DishList dishes={this.state.foodlist} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
+                <DishList dishes={this.state.onlineLikeDish} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
               </div>
         </div>
       </div>

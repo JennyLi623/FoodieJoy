@@ -5,6 +5,7 @@ import { getFirestore } from "firebase/firestore";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import { getPerformance } from "firebase/performance";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCzqAolVTWnaRkNm-0pPPJikRnWk6z6NGY",
@@ -23,5 +24,9 @@ const auth = getAuth(app)
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+// Initialize Performance Monitoring and get a reference to the service
+const perf = getPerformance(app);
+
 export {auth}
 export {db}
+export {perf}
