@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import {BrowserRouter, Route,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route,Link } from "react-router-dom";
+
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import './../css/main.css';
 import DishList from "./DishList.js";
 import SearchBox from './SearchBox';
+
 import foodlist from "./dishes.js";
 import Post from "./Post.js";
 import { collection, addDoc, setDoc, updateDoc, getDocs, doc, arrayUnion, arrayRemove, increment, query, where } from "firebase/firestore";
@@ -17,20 +19,21 @@ class Main extends Component {
     name: "",
     password: "",
     loggedIn: 0,
-    detail: false,
     postbutton:'',
     searchfield: '',
     dishes:[],
     foodlist: [],
     commentslist: [],
     addDish: false,
+    likedDish:[],
+    keyword: ""
   }
 }
 
   handleSubmit = () => {
     const { handleLogIn } = this.props;
     const { name, password } = this.state;
-    this.setState({loggedIn: 2});
+    this.setState({loggedIn: 0});
   };
 
   addLikes = async(commentID, fidx, cidx) => {
@@ -66,6 +69,11 @@ class Main extends Component {
         console.log(this.state.foodlist);
       });
   }
+  
+  updateField = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  };
 
   getComments = async (dishID) => {
     var templist = this.state.commentslist;
@@ -97,23 +105,22 @@ class Main extends Component {
   }
 
   render() {
-    const { name, password, detail} = this.state;
+    const { name, password} = this.state;
     // const filteredDishes = this.state.dishes.filter(
     //   dish =>{
     //     return dish.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     //   });
-    if (detail === false) {
-      return (
-        <div className="mainpage">
-          <div>
-            <h1 id='main-title'>Dishes</h1>
-          </div>
+    
+    return (
+      <div className="mainpage">
           <div className='main-bg'>
             <div class="container">
-              Learn more about delicious Dishes
-              <SearchBox searchChange={this.onSearchChange}/>
+            <h2>Find Best Food Waiting For Your Belly</h2>
+              <SearchBox keyword= {this.state.keyword} searchChange={this.updateField}/>
             </div>
-            <DishList dishes={this.state.foodlist} comments={this.state.commentslist} addLikes={this.addLikes} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
+            <div class="container">
+            <DishList keyword={this.state.keyword} dishes={this.state.foodlist} comments={this.state.commentslist} addLikes={this.addLikes} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
+          </div>
           </div>
           {this.state.addDish &&
             <Post postbutton={this.postFood} changePostState={this.changePostState} getAllDishes={this.getAllDishes}/>
@@ -123,9 +130,9 @@ class Main extends Component {
               Add a Dish
             </Button>
         }
-        </div>
-      );
-    }
+         
+      </div>
+    );
   }
 }
 

@@ -7,8 +7,9 @@ import Grid from '@mui/material/Grid';
 
 
 
-const DishList = ({ dishes, comments, addLikes, likeDish, likedDish }) => {
-  const cardsArray = dishes.map((doc, idx) => (
+const DishList = ({ dishes, comments, addLikes, likeDish, likedDish, keyword }) => {
+  console.log(keyword);
+  const cardsArray = dishes.filter(doc => (doc.data().dish.toLowerCase().includes(keyword) || doc.data().place.toLowerCase().includes(keyword))).map((doc, idx) => (
     <Grid item xs={4}>
     <RecipeReviewCard
       dish={doc.data().dish}
@@ -23,7 +24,6 @@ const DishList = ({ dishes, comments, addLikes, likeDish, likedDish }) => {
       addLikes={addLikes}/>
       </Grid>
   ));
-
   return (
     <div className="block">
       <Box sx={{ flexGrow: 1 }}>
