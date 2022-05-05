@@ -33,7 +33,7 @@ class Main extends Component {
   handleSubmit = () => {
     const { handleLogIn } = this.props;
     const { name, password } = this.state;
-    this.setState({loggedIn: 0});
+    this.setState({loggedIn: 2});
   };
 
   addLikes = async(commentID, fidx, cidx) => {
