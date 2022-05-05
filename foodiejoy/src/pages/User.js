@@ -30,11 +30,11 @@ class User extends Component {
 }
   componentDidMount(){
       this.setState({dishes: foodlist});
-      this.getAllDishes().then(() => {
-        console.log(this.state.foodlist);
-      });
+      //this.getAllDishes().then(() => {
+      //  console.log(this.state.foodlist);
+      //});
       this.getLikeDish().then(() =>{
-        console.log("getLiked Dish");
+        console.log("componentDidMount");
         console.log(this.state.onlineLikeDish);
       });
   }
@@ -56,9 +56,8 @@ class User extends Component {
     console.log("getLikeDish");
     console.log(this.props);
     const { userID } = this.props;
-
-    var templist = []
     console.log(userID);
+
     const docRef = doc(db, "users", userID);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -69,13 +68,16 @@ class User extends Component {
     }
     console.log(docSnap.data());
     var onlineliked = docSnap.data().dishes;
-
+    var templist = []
     const querySnapshot = await getDocs(collection(db, "dishes"));
+    console.log("querie" + querySnapshot);
     querySnapshot.forEach(async (doc) => {
       if (onlineliked.includes(doc.id) ) {
         templist.push(doc);
+        console.log(doc.id);
       }
     });
+    console.log("templist" + templist);
     this.setState({onlineLikeDish: templist});
     console.log(this.state.onlineLikeDish);
   }
@@ -116,7 +118,7 @@ class User extends Component {
         </Container>
         <div>
               <div id='main-bg' className="user-bg">
-                <DishList dishes={this.state.onlineLikeDish} likeDish={this.props.likeDish} likedDish={this.props.likedDish}/>
+                <DishList dishes={this.state.onlineLikeDish} likeDish={this.props.likeDish} likedDish={this.props.likedDish} keyword = ""/>
               </div>
         </div>
       </div>
